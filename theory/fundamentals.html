@@ -1,0 +1,1791 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Complete documentation for the Plate Heat Exchanger (PHE) external unit operation for DWSIM — theory, user guide, and validation.">
+      
+      
+        <meta name="author" content="Prof. Dr. Nicolas Spogis">
+      
+      
+      
+        <link rel="prev" href="index.html">
+      
+      
+        <link rel="next" href="correlations.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>Fundamentals - Plate Heat Exchanger — DWSIM Unit Operation Help</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fundamentals" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="Plate Heat Exchanger — DWSIM Unit Operation Help" class="md-header__button md-logo" aria-label="Plate Heat Exchanger — DWSIM Unit Operation Help" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Plate Heat Exchanger — DWSIM Unit Operation Help
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Fundamentals
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="Plate Heat Exchanger — DWSIM Unit Operation Help" class="md-nav__button md-logo" aria-label="Plate Heat Exchanger — DWSIM Unit Operation Help" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    Plate Heat Exchanger — DWSIM Unit Operation Help
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Theory
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Theory
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="fundamentals.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plate-geometry-and-channel-formation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plate Geometry and Channel Formation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plate Geometry and Channel Formation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plate-stack-arrangement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plate Stack Arrangement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hydraulic-diameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hydraulic Diameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single-channel-flow-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Single-Channel Flow Area
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#total-flow-area-per-side" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Total Flow Area per Side
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single-channel-heat-transfer-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Single-Channel Heat Transfer Area
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#total-heat-transfer-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Total Heat Transfer Area
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mass-velocity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mass Velocity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reynolds-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reynolds Number
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prandtl-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prandtl Number
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-performance-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Performance Metrics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Performance Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#heat-duty-q" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Heat Duty (\(Q\))
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overall-heat-transfer-coefficient-u" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overall Heat Transfer Coefficient (\(U\))
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ua-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UA Product
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log-mean-temperature-difference-lmtd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log-Mean Temperature Difference (LMTD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minimum-internal-temperature-approach-mita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Minimum Internal Temperature Approach (MITA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thermal-effectiveness-varepsilon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Thermal Effectiveness (\(\varepsilon\))
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flow-arrangements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flow Arrangements
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Flow Arrangements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#counterflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Counterflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#co-current-parallel-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Co-current (Parallel Flow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#degrees-of-freedom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Degrees of Freedom
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="correlations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Heat Transfer Correlations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="entu.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Effectiveness-NTU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="pressure-drop.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pressure Drop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="numerical.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Numerical Methods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../user-guide/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/installation.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/design-mode.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Mode
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/parameters.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parameters Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/automation.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../validation/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../validation/counterflow.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Counterflow Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../validation/cocurrent.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Co-current Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../validation/sensitivity.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sensitivity Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../references.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plate-geometry-and-channel-formation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plate Geometry and Channel Formation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plate Geometry and Channel Formation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plate-stack-arrangement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plate Stack Arrangement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hydraulic-diameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hydraulic Diameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single-channel-flow-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Single-Channel Flow Area
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#total-flow-area-per-side" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Total Flow Area per Side
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single-channel-heat-transfer-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Single-Channel Heat Transfer Area
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#total-heat-transfer-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Total Heat Transfer Area
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mass-velocity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mass Velocity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reynolds-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reynolds Number
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prandtl-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prandtl Number
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-performance-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Performance Metrics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Performance Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#heat-duty-q" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Heat Duty (\(Q\))
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overall-heat-transfer-coefficient-u" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overall Heat Transfer Coefficient (\(U\))
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ua-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UA Product
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log-mean-temperature-difference-lmtd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log-Mean Temperature Difference (LMTD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minimum-internal-temperature-approach-mita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Minimum Internal Temperature Approach (MITA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thermal-effectiveness-varepsilon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Thermal Effectiveness (\(\varepsilon\))
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flow-arrangements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flow Arrangements
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Flow Arrangements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#counterflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Counterflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#co-current-parallel-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Co-current (Parallel Flow)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#degrees-of-freedom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Degrees of Freedom
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="fundamentals"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m8.5 4.5-3.1 5 3.1 5.2-3.3 5.8-1.8-.9 2.7-4.9L3 9.5l3.7-5.9zm6.2-.1-3.1 5.1 3.1 5-3.3 5.8-1.8-.9 2.7-4.9-3.1-5 3.7-6zm6.3 0-3.1 5.1 3.1 5-3.3 5.8-1.8-.9 2.7-4.9-3.1-5 3.7-6z"/></svg></span> Fundamentals<a class="headerlink" href="#fundamentals" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>Plate heat exchangers (PHEs) are compact, high-efficiency heat transfer devices in which thin corrugated metal plates are stacked to form alternating flow channels for the hot and cold fluids. Compared with conventional shell-and-tube exchangers, PHEs offer significantly higher heat transfer coefficients per unit volume, lower fouling tendency, and easier maintenance through disassembly of the plate pack (Shah &amp; Focke, 1988).</p>
+<p>This unit operation models a <strong>single-pass, single-phase</strong> PHE with chevron-corrugated plates operating in either counterflow or co-current arrangement. The solver determines the heat duty, outlet temperatures, and pressure drops from the specified plate geometry and inlet stream conditions.</p>
+<div class="admonition info">
+<p class="admonition-title">Plate vs Shell-and-Tube</p>
+<p>PHEs typically achieve overall heat transfer coefficients 3 to 5 times higher than shell-and-tube exchangers for the same duty, owing to the turbulence-promoting corrugation pattern and the thin hydraulic channels. This advantage comes at the cost of a lower pressure rating, which limits PHE use to moderate-pressure applications (Kakac &amp; Liu, 2002).</p>
+</div>
+<hr />
+<h2 id="plate-geometry-and-channel-formation">Plate Geometry and Channel Formation<a class="headerlink" href="#plate-geometry-and-channel-formation" title="Permanent link">&para;</a></h2>
+<h3 id="plate-stack-arrangement">Plate Stack Arrangement<a class="headerlink" href="#plate-stack-arrangement" title="Permanent link">&para;</a></h3>
+<p>A PHE consists of <span class="arithmatex">\(N_p\)</span> corrugated plates compressed between two end frames. The plates are sealed by gaskets (or welded) to create alternating channels: odd-numbered channels carry one fluid while even-numbered channels carry the other.</p>
+<p>The number of flow channels per side depends on the total plate count:</p>
+<div class="arithmatex">\[
+N_{ch,\text{hot}} = \left\lfloor \frac{N_p - 1}{2} \right\rfloor, \qquad N_{ch,\text{cold}} = N_p - 1 - N_{ch,\text{hot}}
+\]</div>
+<p>For an odd number of plates <span class="arithmatex">\(N_p\)</span>, both sides have equal channel counts: <span class="arithmatex">\(N_{ch} = (N_p - 1)/2\)</span>.</p>
+<h3 id="hydraulic-diameter">Hydraulic Diameter<a class="headerlink" href="#hydraulic-diameter" title="Permanent link">&para;</a></h3>
+<p>The hydraulic diameter of a single corrugated channel is defined as:</p>
+<div class="arithmatex">\[
+D_h = \frac{2\,b}{\phi}
+\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(b\)</span> — mean plate spacing (distance between adjacent plates), m</li>
+<li><span class="arithmatex">\(\phi\)</span> — surface enlargement factor (ratio of developed corrugated area to projected flat area), dimensionless; typical values range from 1.15 to 1.25 (Martin, 1996)</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Enlargement Factor</p>
+<p>The enlargement factor <span class="arithmatex">\(\phi\)</span> accounts for the additional surface area created by the chevron corrugation pattern. It is defined as <span class="arithmatex">\(\phi = A_{\text{developed}} / A_{\text{projected}}\)</span>, where <span class="arithmatex">\(A_{\text{developed}}\)</span> is the actual corrugated plate area and <span class="arithmatex">\(A_{\text{projected}}\)</span> is the flat projected area <span class="arithmatex">\(W \times L_p\)</span>.</p>
+</div>
+<figure>
+  <img src="img/chevron_plate.png" width="700" alt="Chevron plate geometry showing corrugation pattern and port arrangement">
+  <figcaption><strong>Figure 1.</strong> Chevron plate geometry showing corrugation pattern and port arrangement</figcaption>
+</figure>
+
+<figure>
+  <img src="img/plate_geometry.png" width="700" alt="Channel formation in a plate heat exchanger">
+  <figcaption><strong>Figure 2.</strong> Channel formation in a plate heat exchanger — alternating hot and cold channels</figcaption>
+</figure>
+
+<h3 id="single-channel-flow-area">Single-Channel Flow Area<a class="headerlink" href="#single-channel-flow-area" title="Permanent link">&para;</a></h3>
+<p>The cross-sectional flow area of one channel is:</p>
+<div class="arithmatex">\[
+A_{ch} = b \times W
+\]</div>
+<p>where <span class="arithmatex">\(W\)</span> is the effective plate width (m).</p>
+<h3 id="total-flow-area-per-side">Total Flow Area per Side<a class="headerlink" href="#total-flow-area-per-side" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+A_{\text{flow}} = N_{ch} \times A_{ch} = N_{ch} \times b \times W
+\]</div>
+<h3 id="single-channel-heat-transfer-area">Single-Channel Heat Transfer Area<a class="headerlink" href="#single-channel-heat-transfer-area" title="Permanent link">&para;</a></h3>
+<p>The effective heat transfer area of one channel is:</p>
+<div class="arithmatex">\[
+A_{\text{plate}} = \phi \times W \times L_p
+\]</div>
+<p>where <span class="arithmatex">\(L_p\)</span> is the effective plate length (between port centres), m.</p>
+<h3 id="total-heat-transfer-area">Total Heat Transfer Area<a class="headerlink" href="#total-heat-transfer-area" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+A_{\text{total}} = (N_p - 2) \times A_{\text{plate}}
+\]</div>
+<div class="admonition warning">
+<p class="admonition-title">End Plates</p>
+<p>The two outermost plates (frame and pressure plates) transfer heat on only one side. The effective number of heat-transferring plates is therefore <span class="arithmatex">\(N_p - 2\)</span>. Some references use <span class="arithmatex">\(N_p - 1\)</span> for the number of thermal plates; this implementation uses <span class="arithmatex">\(N_p - 2\)</span> following the convention of Kakac &amp; Liu (2002).</p>
+</div>
+<h3 id="mass-velocity">Mass Velocity<a class="headerlink" href="#mass-velocity" title="Permanent link">&para;</a></h3>
+<p>The mass velocity (mass flux) through a single channel is:</p>
+<div class="arithmatex">\[
+G = \frac{\dot{m}}{N_{ch} \times A_{ch}} = \frac{\dot{m}}{N_{ch} \times b \times W} \quad \left[\frac{\text{kg}}{\text{m}^2 \cdot \text{s}}\right]
+\]</div>
+<h3 id="reynolds-number">Reynolds Number<a class="headerlink" href="#reynolds-number" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\text{Re} = \frac{G \cdot D_h}{\mu}
+\]</div>
+<p>where <span class="arithmatex">\(\mu\)</span> is the dynamic viscosity of the fluid evaluated at the mean bulk temperature.</p>
+<h3 id="prandtl-number">Prandtl Number<a class="headerlink" href="#prandtl-number" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\text{Pr} = \frac{c_p \cdot \mu}{k}
+\]</div>
+<p>where <span class="arithmatex">\(c_p\)</span> is the specific heat capacity and <span class="arithmatex">\(k\)</span> is the thermal conductivity of the fluid.</p>
+<hr />
+<h2 id="key-performance-metrics">Key Performance Metrics<a class="headerlink" href="#key-performance-metrics" title="Permanent link">&para;</a></h2>
+<h3 id="heat-duty-q">Heat Duty (<span class="arithmatex">\(Q\)</span>)<a class="headerlink" href="#heat-duty-q" title="Permanent link">&para;</a></h3>
+<p>The rate of heat transfer between the hot and cold streams:</p>
+<div class="arithmatex">\[
+Q = \dot{m}_h \cdot c_{p,h} \cdot (T_{h,\text{in}} - T_{h,\text{out}}) = \dot{m}_c \cdot c_{p,c} \cdot (T_{c,\text{out}} - T_{c,\text{in}}) \quad [\text{W}]
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Sign Convention</p>
+<p>In this implementation, <span class="arithmatex">\(Q &gt; 0\)</span> always represents the magnitude of heat transferred from the hot stream to the cold stream. Energy balance requires <span class="arithmatex">\(Q_{\text{hot}} = Q_{\text{cold}} + Q_{\text{leak}}\)</span>.</p>
+</div>
+<h3 id="overall-heat-transfer-coefficient-u">Overall Heat Transfer Coefficient (<span class="arithmatex">\(U\)</span>)<a class="headerlink" href="#overall-heat-transfer-coefficient-u" title="Permanent link">&para;</a></h3>
+<p>The overall coefficient accounts for all thermal resistances in series between the two fluid streams:</p>
+<div class="arithmatex">\[
+\frac{1}{U} = \frac{1}{h_{\text{hot}}} + R_{f,\text{hot}} + \frac{\delta_p}{k_p} + R_{f,\text{cold}} + \frac{1}{h_{\text{cold}}}
+\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(h_{\text{hot}}, h_{\text{cold}}\)</span> — convective heat transfer coefficients (W/m<span class="arithmatex">\(^2\)</span>/K)</li>
+<li><span class="arithmatex">\(R_{f,\text{hot}}, R_{f,\text{cold}}\)</span> — fouling resistances (m<span class="arithmatex">\(^2\)</span>K/W)</li>
+<li><span class="arithmatex">\(\delta_p\)</span> — plate thickness (m)</li>
+<li><span class="arithmatex">\(k_p\)</span> — plate thermal conductivity (W/m/K)</li>
+</ul>
+<h3 id="ua-product">UA Product<a class="headerlink" href="#ua-product" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+UA = U \times A_{\text{total}} \quad [\text{W/K}]
+\]</div>
+<h3 id="log-mean-temperature-difference-lmtd">Log-Mean Temperature Difference (LMTD)<a class="headerlink" href="#log-mean-temperature-difference-lmtd" title="Permanent link">&para;</a></h3>
+<p>For counterflow:</p>
+<div class="arithmatex">\[
+\Delta T_{\text{lm}} = \frac{\Delta T_1 - \Delta T_2}{\ln(\Delta T_1 / \Delta T_2)}
+\]</div>
+<p>where <span class="arithmatex">\(\Delta T_1 = T_{h,\text{in}} - T_{c,\text{out}}\)</span> and <span class="arithmatex">\(\Delta T_2 = T_{h,\text{out}} - T_{c,\text{in}}\)</span>.</p>
+<p>The design equation relating these quantities is:</p>
+<div class="arithmatex">\[
+Q = U \cdot A_{\text{total}} \cdot \Delta T_{\text{lm}}
+\]</div>
+<h3 id="minimum-internal-temperature-approach-mita">Minimum Internal Temperature Approach (MITA)<a class="headerlink" href="#minimum-internal-temperature-approach-mita" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\text{MITA} = \min\!\left(T_{h,\text{in}} - T_{c,\text{out}},\; T_{h,\text{out}} - T_{c,\text{in}}\right)
+\]</div>
+<div class="admonition warning">
+<p class="admonition-title">Feasibility Check</p>
+<p>If MITA <span class="arithmatex">\(\le 0\)</span>, the specified conditions imply a temperature crossover which is thermodynamically infeasible.</p>
+</div>
+<h3 id="thermal-effectiveness-varepsilon">Thermal Effectiveness (<span class="arithmatex">\(\varepsilon\)</span>)<a class="headerlink" href="#thermal-effectiveness-varepsilon" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\varepsilon = \frac{Q}{Q_{\max}} = \frac{Q}{C_{\min} \cdot (T_{h,\text{in}} - T_{c,\text{in}})}
+\]</div>
+<p>where <span class="arithmatex">\(C_{\min} = \min(\dot{m}_h c_{p,h},\; \dot{m}_c c_{p,c})\)</span> is the minimum heat capacity rate (Kays &amp; London, 1984).</p>
+<hr />
+<h2 id="flow-arrangements">Flow Arrangements<a class="headerlink" href="#flow-arrangements" title="Permanent link">&para;</a></h2>
+<h3 id="counterflow">Counterflow<a class="headerlink" href="#counterflow" title="Permanent link">&para;</a></h3>
+<p>In counterflow, the hot and cold streams enter the exchanger at <strong>opposite ends</strong> and flow in opposite directions. This arrangement maximises the temperature driving force along the entire length of the exchanger and allows the cold outlet temperature to approach the hot inlet temperature.</p>
+<figure>
+  <img src="img/counterflow_diagram.png" width="600" alt="Counterflow arrangement in a plate heat exchanger">
+  <figcaption><strong>Figure 3.</strong> Counterflow arrangement — streams enter at opposite ends and flow in opposing directions, maximising the mean temperature difference.</figcaption>
+</figure>
+
+<p>For counterflow, the LMTD is always the largest achievable for given inlet and outlet temperatures, which means the required heat transfer area is minimised.</p>
+<h3 id="co-current-parallel-flow">Co-current (Parallel Flow)<a class="headerlink" href="#co-current-parallel-flow" title="Permanent link">&para;</a></h3>
+<p>In co-current flow, both streams enter at the <strong>same end</strong> and flow in the same direction. The outlet temperatures of both streams asymptotically approach a common mixing temperature, which limits the thermal effectiveness.</p>
+<figure>
+  <img src="img/cocurrent_diagram.png" width="600" alt="Co-current arrangement in a plate heat exchanger">
+  <figcaption><strong>Figure 4.</strong> Co-current arrangement — both streams enter at the same end, limiting the maximum achievable heat transfer.</figcaption>
+</figure>
+
+<div class="admonition tip">
+<p class="admonition-title">Counterflow vs Co-current</p>
+<p>For identical UA and inlet conditions, counterflow always transfers more heat than co-current. Counterflow is the default and recommended configuration. Co-current flow is occasionally preferred when a more uniform wall temperature is needed to avoid thermal stresses or thermal degradation.</p>
+</div>
+<hr />
+<h2 id="degrees-of-freedom">Degrees of Freedom<a class="headerlink" href="#degrees-of-freedom" title="Permanent link">&para;</a></h2>
+<p>For a 2-stream plate heat exchanger in <strong>design mode</strong>, the specification structure is:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Specified by User</th>
+<th>Calculated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Inlet conditions</strong></td>
+<td><span class="arithmatex">\(T_{h,\text{in}}\)</span>, <span class="arithmatex">\(T_{c,\text{in}}\)</span>, <span class="arithmatex">\(\dot{m}_h\)</span>, <span class="arithmatex">\(\dot{m}_c\)</span>, <span class="arithmatex">\(P_h\)</span>, <span class="arithmatex">\(P_c\)</span></td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Geometry</strong></td>
+<td><span class="arithmatex">\(N_p\)</span>, <span class="arithmatex">\(W\)</span>, <span class="arithmatex">\(L_p\)</span>, <span class="arithmatex">\(b\)</span>, <span class="arithmatex">\(\delta_p\)</span>, <span class="arithmatex">\(\beta\)</span>, <span class="arithmatex">\(\phi\)</span>, <span class="arithmatex">\(k_p\)</span></td>
+<td><span class="arithmatex">\(D_h\)</span>, <span class="arithmatex">\(A_{ch}\)</span>, <span class="arithmatex">\(A_{\text{total}}\)</span></td>
+</tr>
+<tr>
+<td><strong>Fouling</strong></td>
+<td><span class="arithmatex">\(R_{f,\text{hot}}\)</span>, <span class="arithmatex">\(R_{f,\text{cold}}\)</span></td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Flow arrangement</strong></td>
+<td>Counterflow or co-current</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Results</strong></td>
+<td>—</td>
+<td><span class="arithmatex">\(Q\)</span>, <span class="arithmatex">\(T_{h,\text{out}}\)</span>, <span class="arithmatex">\(T_{c,\text{out}}\)</span>, <span class="arithmatex">\(U\)</span>, <span class="arithmatex">\(\text{UA}\)</span>, <span class="arithmatex">\(\varepsilon\)</span>, <span class="arithmatex">\(\Delta P_h\)</span>, <span class="arithmatex">\(\Delta P_c\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The design mode is <strong>fully determined</strong> once all geometry parameters and inlet conditions are provided. The solver iteratively evaluates fluid properties at average temperatures, computes individual heat transfer coefficients from the Martin (1996) correlation, assembles the overall <span class="arithmatex">\(U\)</span>, and applies the e-NTU method to determine the outlet temperatures and heat duty.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="index.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Theory">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Theory
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="correlations.html" class="md-footer__link md-footer__link--next" aria-label="Next: Heat Transfer Correlations">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Heat Transfer Correlations
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Prof. Dr. Nicolas Spogis — AI4Tech
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://www.youtube.com/@AIforTechnology" target="_blank" rel="noopener" title="YouTube — AI for Technology" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://www.linkedin.com/in/spogis/" target="_blank" rel="noopener" title="LinkedIn — Nicolas Spogis" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.indexes", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

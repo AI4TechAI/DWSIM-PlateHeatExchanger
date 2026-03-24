@@ -1,0 +1,23 @@
+/* Fix sidebar navigation scroll */
+.md-sidebar--primary .md-sidebar__scrollwrap {
+  overflow-y: auto;
+  max-height: calc(100vh - 4.8rem);
+}
+
+.md-nav--primary > .md-nav__list {
+  padding-bottom: 3rem;
+}
+
+/* Validation result tables */
+.md-typeset table.validation-pass td:last-child {
+  color: #16a34a;
+  font-weight: 700;
+}
+
+/* Figure captions */
+.md-typeset figcaption {
+  font-size: 0.85rem;
+  color: #64748b;
+  text-align: center;
+  margin-top: 0.5rem;
+}
